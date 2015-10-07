@@ -1,0 +1,17 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @episode.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @episode.description %>
+</p>
+
+<% if current_user_subscribed? %>
+  OUR SECRET VIDEO
+<% else %>
+  <%= link_to "Subscribe To Watch", new_subscription_path, class: "btn btn-primary" %>
+<% end %>
