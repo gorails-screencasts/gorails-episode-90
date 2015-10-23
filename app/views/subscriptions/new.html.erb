@@ -1,29 +1,41 @@
 <h1>Subscribe!</h1>
 
 <%= form_tag subscription_path, id: "payment-form" do %>
-  <span class="payment-errors"></span>
+  <% if current_user.card_last4? %>
+    <div class="card-on-file">
+      <p>Your current card on file is:</p>
+      <div><%= current_user.card_type %> **** **** **** <%= current_user.card_last4 %></div>
+      <div>Expires <%= current_user.card_exp_month %> / <%= current_user.card_exp_year %></div>
 
-  <div class="form-row">
-    <label>
-      <span>Card Number</span>
-      <input value="4242 4242 4242 4242" type="text" size="20" data-stripe="number"/>
-    </label>
-  </div>
+      <p><%= link_to "Use a different card", "#", class: "use-different-card" %></p>
+    </div>
+  <% end %>
 
-  <div class="form-row">
-    <label>
-      <span>CVC</span>
-      <input value="123" type="text" size="4" data-stripe="cvc"/>
-    </label>
-  </div>
+  <div class="card-fields <%= card_fields_class %>">
+    <span class="payment-errors"></span>
 
-  <div class="form-row">
-    <label>
-      <span>Expiration (MM/YYYY)</span>
-      <input value="12" type="text" size="2" data-stripe="exp-month"/>
-    </label>
-    <span> / </span>
-    <input value="2020" type="text" size="4" data-stripe="exp-year"/>
+    <div class="form-row">
+      <label>
+        <span>Card Number</span>
+        <input value="4242 4242 4242 4242" type="text" size="20" data-stripe="number"/>
+      </label>
+    </div>
+
+    <div class="form-row">
+      <label>
+        <span>CVC</span>
+        <input value="123" type="text" size="4" data-stripe="cvc"/>
+      </label>
+    </div>
+
+    <div class="form-row">
+      <label>
+        <span>Expiration (MM/YYYY)</span>
+        <input value="12" type="text" size="2" data-stripe="exp-month"/>
+      </label>
+      <span> / </span>
+      <input value="2020" type="text" size="4" data-stripe="exp-year"/>
+    </div>
   </div>
 
   <button type="submit">Submit Payment</button>
