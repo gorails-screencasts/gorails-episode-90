@@ -11,7 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151007164231) do
+ActiveRecord::Schema.define(version: 20151106165914) do
+
+  create_table "charges", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "stripe_id"
+    t.integer  "amount"
+    t.string   "card_last4"
+    t.string   "card_type"
+    t.string   "card_exp_month"
+    t.string   "card_exp_year"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "charges", ["stripe_id"], name: "index_charges_on_stripe_id", unique: true
 
   create_table "episodes", force: :cascade do |t|
     t.string   "title"
