@@ -50,3 +50,5 @@ gem 'bootstrap-sass', '~> 3.3.5.1'
 gem 'stripe', '~> 1.29.1'
 gem 'jquery-turbolinks'
 gem 'stripe_event', '~> 1.5'
+
+gem 'administrate'
